@@ -1,7 +1,7 @@
-#.Net Core Application to perform CRUD Operations. 
+# .Net Core Application to perform CRUD Operations. 
 
 
-Technologies Used:-
+## Technologies Used:-
 
 1).Net Core MVC
 
@@ -9,14 +9,14 @@ Technologies Used:-
 
 
 
-Steps to run:-
+## Steps to run:-
 
 1.Open this project in visual studio.
 
 2.Run IIS Express
 
 
-Screenshots:-
+## Screenshots:-
 
 Read:
 
