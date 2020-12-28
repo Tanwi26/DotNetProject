@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\tanwi\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\tanwi\\.nuget\\packages"
+    ]
+  }
+}

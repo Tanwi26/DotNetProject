@@ -1,0 +1,124 @@
+﻿@model DotNetProject.Models.Customer
+
+<br />
+<h2 class="text-info">@(Model.Id != 0 ? "Edit" : "Add" ) Customer Info</h2>
+<br />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="./../../css/customer.css" />
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<div class="border container" style="padding:30px;">
+    <form method="post">
+
+        @if (Model.Id != 0)
+        {
+            <input type="hidden" asp-for="Id" />
+        }
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Name" class="form-control" autocomplete="off"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="DOB"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="DOB" type="text" id="datepicker" autocomplete="off" onchange="AgeValidation()"></input>
+
+                <span id="lblError" asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Email"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Email" class="form-control" autocomplete="off"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Phone"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Phone" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="City"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="City" class="form-control" autocomplete="off"/>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div>
+       
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <button type="submit" class="btn btn-primary form-control" id="addButton" disabled="disabled">
+                   
+                    @(Model.Id != 0 ? "Update" : "Add" )
+                </button>
+            </div>
+            <div class="col-3">
+                <a asp-action="Home" class="btn btn-success form-control">Go Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $("#datepicker").datepicker({
+            dateFormat:"dd M yy",
+            maxDate: "+1d",
+            minDate: new Date(1920, 1 - 1, 1),
+            yearRange: "1950:",
+            changeMonth: true,
+            changeYear: true,
+    
+
+        });
+        
+      
+    });
+    
+
+    function CalculateAge() {
+        var dob = $("#datepicker").val();
+        dob = new Date(dob);
+        var today = new Date();
+        var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+        return age;
+    }
+
+    function AgeValidation() {
+        var age = CalculateAge();
+       
+        if (age >= 18) {
+           
+            $("#addButton").attr('disabled', false);
+
+        } else {
+            if (age) {
+                alert("Age should be greater than 18");
+                $("#addButton").attr('disabled', 'disabled');
+            }
+        }
+    }
+    
+
+</script>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
